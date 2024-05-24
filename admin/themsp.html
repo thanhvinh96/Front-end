@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/stylead.css">
+    <title>Document</title>
+</head>
+<body>
+    <form id="productTypeForm">
+        <div class="form-nhap">
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Tên Sản Phẩm</label>
+            <input type="text" class="form-control" id="tensp" name="tensp" placeholder="Nhập Tên Sản Phẩm">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Giá Sản phẩm</label>
+            <input type="text" class="form-control" id="giasp" name="giasp" placeholder="Nhập Giá Sản Phẩm">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Giá khuyến mãi</label>
+            <input type="text" class="form-control" id="giakm" name="gia_km" placeholder="Nhập Giá Sản Phẩm">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Ngày đăng</label>
+            <input type="date" class="form-control" id="ngaydang" name="chitietsp" placeholder="chọn ngày">
+          </div> 
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Danh Mục</label>
+            <input type="number" class="form-control" id="danhmuc" name="danhmuc" placeholder="Nhập Danh Mục">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Lượt Xem</label>
+            <input type="number" class="form-control" id="luotxem" name="luotxem" placeholder="Nhập Số Lượng">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">sản phẩm hot</label>
+            <input type="number" class="form-control" id="spHot" name="spHot" placeholder="Nhập vào trị số 1 hoặc 0">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Ẩn Hiện</label>
+            <input type="number" class="form-control" id="anHien" name="anHien" placeholder="Nhập vào trị số 1 hoặc 0">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Tính Chất</label>
+            <input type="number" class="form-control" id="tinhChat" name="tinhChat" placeholder="Nhập vào trị số 1 -2 hoặc 3">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Màu Sắc</label>
+            <input type="text" class="form-control" id="mauSac" name="mauSac" placeholder="Nhập Vào màu của sản phẩm">
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Cân Nặng</label>
+            <input type="number" class="form-control" id="canNang" name="canNang" placeholder="Nhập vào cân nặng">
+          </div>
+          <label for="">Hình Ảnh Sp</label> <br>
+          <input type="file" id="fileInput" onchange="previewFile()"></input> <br> <br> <hr>
+          <button type="button" id="btn">Thêm</button>
+          <img id = "img_preview" src="" height="200"><br>
+          <br>
+        </div>
+    </form>
+    <div id="message">
+    </div>
+</body>
+</html>
+<script src="/admin/js/app.js"></script>
+<script>
+  function previewFile(){
+    const preview = document.querySelector("#img_preview");
+    const file = document.querySelector("#fileInput").files[0];
+    const reader  = new FileReader();
+    reader.addEventListener("load",function(){
+      preview.src = reader.result;
+    },false);
+    if(file){
+      reader.readAsDataURL(file);
+    } 
+  }
+</script>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../home/css/stylead.css">
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-2 ">
+            <div class="logo"><h1 class="text-center"><span>CHỢ TỐT</span> <br><span class="text-white">ADMIN</span></h1></div>
+            <hr>
+            <p><i class="bi bi-pie-chart-fill me-2"></i><a  href=""> Quản lý thống kê</a></p>
+            <p><i class="bi bi-tag-fill me-2"></i><a  href=""> Quản lý danh mục</a></p>
+            <p><i class="bi bi-box-seam me-2"></i><a  href="quanlysp.html"> Quản lý sản phẩm</a></p>
+            <p><i class="bi bi-people-fill me-2"></i><a  href="quanlyuser.html"> Quản lý người dùng</a></p>
+            <p><i class="bi bi-cart-fill me-2"></i><a  href=""> Quản lý đơn hàng</a></p>
+            <p><i class="bi bi-chat-left-text-fill me-2"></i><a  href=""> Quản lý bình luận</a></p>
+            <hr>
+            <div class="logout">           
+                <a href="../Home/index.html"><button>Đăng xuất</button></a> 
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="content">
+                <a href="./themsp.html"> <button>THÊM<Main></Main></button> </a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Hình Ảnh</th>
+                            <th>ID - Tên SP - Ngày đăng</th>
+                            <th>Giá & Trạng Thái</th>
+                            <th>Thông Tin</th>
+                            <th>Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listspAdmin">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer><p></p></footer>
+</body>
+</html>
+<script>
+    fetch(`http://localhost:3000/admin/sp`).then(res =>res.json()).then(data =>{
+        let str =``;
+        data.forEach((sp,index) =>{
+            str +=`
+            <tr>
+                <td>${index+1}</td>
+                <td><img height ="100" with="150" src="${sp.img}"></td>
+                <td><p>ID:${sp.id_sp}</p> <p>TênSP: ${sp.tensp}</p> <p>Ngày Đăng: ${sp.ngay_dang}</p></td>
+                <td><p>Giá Gốc:${sp.giasp}</p> <p>Giá KM: ${sp.gia_km}</p><p>${sp.an_hien}</p></td>
+                <td><p>Màu Sắc:${sp.mau_sac}</p><p>Cân Nặng: ${sp.can_nang} KG</p></td>
+                <td>
+                    <button type="button" idsp="${sp.id_sp}" class="btnxoasp">xóa</button>
+                    <a href="sua_sp.html?id=${sp.id_sp}"><button>sửa</button> </a>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            `;
+        });
+        document.getElementById("listspAdmin").innerHTML=str;
+    });
+    const xoa_sp = async (btn) => {
+    let id = btn.getAttribute('idsp');
+    let hoi = window.confirm(`Bạn Muốn Xóa`);
+    if (hoi == false)
+        return;
+    let opt = { method: 'delete' };
+    let kq = await fetch(`http://localhost:3000/admin/sp/delete/${id}`, opt).then(res => res.json()).then(data => data);
+    document.location = 'quanlysp.html';
+};
+</script>
